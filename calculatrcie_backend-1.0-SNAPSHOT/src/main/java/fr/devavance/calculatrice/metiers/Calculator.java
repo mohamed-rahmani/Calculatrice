@@ -10,4 +10,19 @@ package fr.devavance.calculatrice.metiers;
  */
 public class Calculator {
     
+    public double addition(String s_operande_1,String s_operande_2){
+        return Double.valueOf(s_operande_1) + Double.valueOf(s_operande_2);
+    }
+    
+    public double soustraction(String s_operande_1,String s_operande_2){
+        return Double.valueOf(s_operande_1) - Double.valueOf(s_operande_2);
+    }
+    
+    public double division(String s_operande_1,String s_operande_2){
+        return Double.valueOf(s_operande_1) / Double.valueOf(s_operande_2);
+    }
+    
+    public double multiplication(String s_operande_1,String s_operande_2){
+        return Double.valueOf(s_operande_1) * Double.valueOf(s_operande_2);
+    }
 }
