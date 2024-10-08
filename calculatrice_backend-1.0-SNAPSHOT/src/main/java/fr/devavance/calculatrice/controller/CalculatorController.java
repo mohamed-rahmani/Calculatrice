@@ -6,12 +6,13 @@ package fr.devavance.calculatrice.controller;
 
 import fr.devavance.calculatrice.metiers.Calculator;
 import java.io.IOException;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *
@@ -31,38 +32,42 @@ public class CalculatorController extends HttpServlet {
         String operation = request.getParameter("operation");
         String operande1 = request.getParameter("operande1");
         String operande2 = request.getParameter("operande2");
-        
         String res;
         
         switch (operation) {
-            case "+":
+            case "add":
                 {
                     res = String.valueOf(Calculator.addition(operande1,operande2));
+                    operation = "addition";
                     break;
                 }
-            case "-":
+            case "sub":
                 {
                     res = String.valueOf(Calculator.soustraction(operande1,operande2));
+                    operation = "soustracton";
                     break;
                 }
-            case "/":
+            case "div":
                 {
                     res = String.valueOf(Calculator.division(operande1,operande2));
+                    operation = "division";
                     break;
                 }
-            case "*":
+            case "mul":
                 {
                     res = String.valueOf(Calculator.multiplication(operande1,operande2));
+                    operation = "multiplication";
                     break;
                 }
             default:
-                res = "<p>Wrong operation !</p>";
+                res = "<strong>Wrong operation !</strong>";
+                operation = "incorrect";
                 break;
         }
         
         String reponse = "";
         
-        if (operation!=null || operande1!=null || operande2!=null) {
+        if (operande1!=null && operande2!=null) {
             reponse += "<p><span>valeur de l'opérande 1 : </span><strong>" + operande1 + "</strong></p>";
             reponse += "<p><span>valeur de l'opérande 2 : </span><strong>" + operande2 + "</strong></p>";
             reponse += "<p><span>l'opération : </span><strong>" + operation + "</strong></p>";
@@ -70,6 +75,8 @@ public class CalculatorController extends HttpServlet {
         } else {
             reponse = "<p>les valeurs manquantes";
         }
+        
+        reponse += "<button><a href='/calculatrice_frontend-1.0-SNAPSHOT/form_saisies_operation.html'>Home Page</a></button>";
         
         out.print(reponse);
     }
